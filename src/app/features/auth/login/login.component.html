@@ -1,0 +1,53 @@
+<div class="login-container">
+  <div class="animated-background">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div class="login-card">
+    <div class="logo-section">
+      <h1 class="logo-title">Ademicon</h1>
+    </div>
+
+    <form class="login-form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="loginData.email"
+          placeholder="seu@email.com"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="loginData.password"
+          placeholder="••••••••"
+          required
+        />
+      </div>
+
+      <div class="form-options">
+        <label class="checkbox-container">
+          <input type="checkbox" [(ngModel)]="rememberMe" name="remember" />
+          <span>Lembrar-me</span>
+        </label>
+        <a href="#" class="forgot-password">Esqueceu a senha?</a>
+      </div>
+
+      <button type="submit" class="login-button">Entrar</button>
+
+      <div class="signup-link">
+        Não tem uma conta? <a href="#">Cadastre-se</a>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,209 @@
+.login-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.animated-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #8B0000 0%, #DC143C 50%, #FF6B6B 100%);
+  z-index: 1;
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.6;
+    animation: float 20s infinite ease-in-out;
+
+    &.blob-1 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, #FF4500, #DC143C);
+      top: -100px;
+      left: -100px;
+      animation-delay: 0s;
+    }
+
+    &.blob-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #C71585, #8B0000);
+      bottom: -150px;
+      right: -150px;
+      animation-delay: 7s;
+    }
+
+    &.blob-3 {
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, #FF6347, #B22222);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: 3.5s;
+    }
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(50px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-30px, 30px) scale(0.9);
+  }
+}
+
+.login-card {
+  position: relative;
+  z-index: 2;
+  width: 420px;
+  padding: 50px 40px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.logo-section {
+  text-align: center;
+  margin-bottom: 40px;
+
+  .logo-title {
+    font-size: 42px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px;
+  }
+}
+
+.login-form {
+  .form-group {
+    margin-bottom: 25px;
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #ffffff;
+      font-weight: 500;
+      font-size: 14px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+      font-size: 15px;
+      color: #ffffff;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      &:focus {
+        outline: none;
+        background: rgba(255, 255, 255, 0.35);
+        border-color: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+
+  .form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      color: #ffffff;
+      font-size: 14px;
+      cursor: pointer;
+
+      input[type="checkbox"] {
+        width: auto;
+        margin-right: 8px;
+        cursor: pointer;
+      }
+    }
+
+    .forgot-password {
+      color: #ffffff;
+      font-size: 14px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.3s ease;
+
+      &:hover {
+        opacity: 0.8;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .login-button {
+    width: 100%;
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #8B0000;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      background: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  .signup-link {
+    text-align: center;
+    margin-top: 25px;
+    color: #ffffff;
+    font-size: 14px;
+
+    a {
+      color: #ffffff;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+
+      &:hover {
+        opacity: 0.8;
+        text-decoration: underline;
+      }
+    }
+  }
+}
