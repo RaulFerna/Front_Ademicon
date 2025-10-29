@@ -28,13 +28,15 @@ export class LoginComponent {
     });
   }
 
-  onSubmit(): void {
+  enviar() {
     if (this.loginForm.valid) {
       const { usuario, senha } = this.loginForm.value;
       if (usuario === 'admin' && senha === '1234') {
-        this.router.navigate(['/vendas']);
+        console.log(usuario.value + " " + senha.value);
+        //this.router.navigate(['/vendas']);
       } else {
-        this.erroLogin = 'Usuário ou senha incorretos.';
+        console.log("Errou a sneha")
+        //this.erroLogin = 'Usuário ou senha incorretos.';
       }
     }
   }
