@@ -1,19 +1,16 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  loginForm!: FormGroup;
-  erroLogin: string | null = null;
   loginData = {
     email: '',
     password: ''
@@ -21,23 +18,18 @@ export class LoginComponent {
 
   rememberMe = false;
 
-  constructor(private fb: FormBuilder, private router: Router) {
-    this.loginForm = this.fb.group({
-      usuario: ['', Validators.required],
-      senha: ['', Validators.required]
-    });
-  }
+  constructor(private router: Router) {}
 
   enviar() {
-    if (this.loginForm.valid) {
-      const { usuario, senha } = this.loginForm.value;
-      if (usuario === 'admin' && senha === '1234') {
-        console.log(usuario.value + " " + senha.value);
-        //this.router.navigate(['/vendas']);
-      } else {
-        console.log("Errou a sneha")
-        //this.erroLogin = 'Usuário ou senha incorretos.';
-      }
+    console.log("Tentando logar com:");
+    console.log("Email:", this.loginData.email);
+    console.log("Senha:", this.loginData.password);
+
+    if (this.loginData.email === 'admin' && this.loginData.password === '1234') {
+      console.log('Login bem-sucedido!');
+      this.router.navigate(['/vendas']);
+    } else {
+      console.log('Usuário ou senha incorretos.');
     }
   }
 }
