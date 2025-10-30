@@ -1,1 +1,187 @@
-<p>vendas works!</p>
+<div class="sales-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo-section">
+        <div class="logo-icon">A</div>
+        <div class="company-info">
+          <h2>Ademicon</h2>
+          <p>Internal Management</p>
+        </div>
+      </div>
+  
+      <nav class="menu">
+        <a href="#" class="menu-item">
+          <i class="icon">🏠</i>
+          <span>Home</span>
+        </a>
+        <a href="#" class="menu-item">
+          <i class="icon">🚚</i>
+          <span>Transportadoras</span>
+        </a>
+        <a href="#" class="menu-item">
+          <i class="icon">👥</i>
+          <span>Funcionários</span>
+        </a>
+        <a href="#" class="menu-item">
+          <i class="icon">📦</i>
+          <span>Estoque</span>
+        </a>
+        <a href="#" class="menu-item active">
+          <i class="icon">💰</i>
+          <span>Vendas</span>
+        </a>
+        <a href="#" class="menu-item">
+          <i class="icon">💳</i>
+          <span>Financeiro</span>
+        </a>
+      </nav>
+    </aside>
+  
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="content-header">
+        <div class="action-buttons">
+          <button class="btn btn-primary" (click)="openModal('add')">Adicionar</button>
+          <button class="btn btn-secondary" (click)="openModal('remove')">Remover</button>
+          <button class="btn btn-secondary" (click)="openModal('edit')">Editar</button>
+        </div>
+      </div>
+  
+      <div class="total-section">
+        <p>Total vendas: {{ getTotalSales() | currency:'BRL' }}</p>
+      </div>
+  
+      <!-- Table Header -->
+      <div class="table-header">
+        <div class="header-cell">Sale ID</div>
+        <div class="header-cell">Client Name</div>
+        <div class="header-cell">Product Name</div>
+        <div class="header-cell">Quantity</div>
+        <div class="header-cell">Unit Price</div>
+        <div class="header-cell">Total Value</div>
+        <div class="header-cell">Date</div>
+      </div>
+  
+      <!-- Table Rows -->
+      <div class="table-body">
+        <div class="table-row" *ngFor="let sale of sales" (click)="selectSale(sale)" [class.selected]="selectedSale?.id === sale.id">
+          <div class="cell">{{ sale.id }}</div>
+          <div class="cell">{{ sale.clientName }}</div>
+          <div class="cell">{{ sale.productName }}</div>
+          <div class="cell">{{ sale.quantity }} un.</div>
+          <div class="cell">{{ sale.unitPrice | currency:'BRL' }}</div>
+          <div class="cell">{{ sale.totalValue | currency:'BRL' }}</div>
+          <div class="cell">{{ sale.date | date:'dd/MM/yyyy' }}</div>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <!-- Modal Adicionar -->
+  <div class="modal-overlay" *ngIf="showModal && modalType === 'add'" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Adicionar Venda</h2>
+        <button class="close-btn" (click)="closeModal()">✕</button>
+      </div>
+      <form class="modal-form" (ngSubmit)="addSale()">
+        <div class="form-group">
+          <label>ID da Venda</label>
+          <input type="text" [(ngModel)]="formData.id" name="id" required>
+        </div>
+        <div class="form-group">
+          <label>Nome do Cliente</label>
+          <input type="text" [(ngModel)]="formData.clientName" name="clientName" required>
+        </div>
+        <div class="form-group">
+          <label>Nome do Produto</label>
+          <input type="text" [(ngModel)]="formData.productName" name="productName" required>
+        </div>
+        <div class="form-group">
+          <label>Quantidade</label>
+          <input type="number" [(ngModel)]="formData.quantity" name="quantity" required>
+        </div>
+        <div class="form-group">
+          <label>Preço Unitário</label>
+          <input type="number" [(ngModel)]="formData.unitPrice" name="unitPrice" step="0.01" required>
+        </div>
+        <div class="form-group">
+          <label>Data</label>
+          <input type="date" [(ngModel)]="formData.date" name="date" required>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-cancel" (click)="closeModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Adicionar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Modal Remover -->
+  <div class="modal-overlay" *ngIf="showModal && modalType === 'remove'" (click)="closeModal()">
+    <div class="modal-content modal-small" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Remover Venda</h2>
+        <button class="close-btn" (click)="closeModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p *ngIf="!selectedSale" class="warning-text">Selecione uma venda na lista para remover.</p>
+        <div *ngIf="selectedSale">
+          <p>Tem certeza que deseja remover esta venda?</p>
+          <div class="sale-info">
+            <p><strong>ID:</strong> {{ selectedSale.id }}</p>
+            <p><strong>Cliente:</strong> {{ selectedSale.clientName }}</p>
+            <p><strong>Produto:</strong> {{ selectedSale.productName }}</p>
+            <p><strong>Valor:</strong> {{ selectedSale.totalValue | currency:'BRL' }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" *ngIf="selectedSale">
+        <button type="button" class="btn btn-cancel" (click)="closeModal()">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="removeSale()">Remover</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal Editar -->
+  <div class="modal-overlay" *ngIf="showModal && modalType === 'edit'" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Editar Venda</h2>
+        <button class="close-btn" (click)="closeModal()">✕</button>
+      </div>
+      <div *ngIf="!selectedSale" class="modal-body">
+        <p class="warning-text">Selecione uma venda na lista para editar.</p>
+      </div>
+      <form class="modal-form" *ngIf="selectedSale" (ngSubmit)="editSale()">
+        <div class="form-group">
+          <label>ID da Venda</label>
+          <input type="text" [(ngModel)]="formData.id" name="id" disabled>
+        </div>
+        <div class="form-group">
+          <label>Nome do Cliente</label>
+          <input type="text" [(ngModel)]="formData.clientName" name="clientName" required>
+        </div>
+        <div class="form-group">
+          <label>Nome do Produto</label>
+          <input type="text" [(ngModel)]="formData.productName" name="productName" required>
+        </div>
+        <div class="form-group">
+          <label>Quantidade</label>
+          <input type="number" [(ngModel)]="formData.quantity" name="quantity" required>
+        </div>
+        <div class="form-group">
+          <label>Preço Unitário</label>
+          <input type="number" [(ngModel)]="formData.unitPrice" name="unitPrice" step="0.01" required>
+        </div>
+        <div class="form-group">
+          <label>Data</label>
+          <input type="date" [(ngModel)]="formData.date" name="date" required>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-cancel" (click)="closeModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
