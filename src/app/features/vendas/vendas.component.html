@@ -10,30 +10,30 @@
       </div>
   
       <nav class="menu">
-        <a href="#" class="menu-item">
+        <!-- <a href="#" class="menu-item">
           <i class="icon">🏠</i>
           <span>Home</span>
-        </a>
+        </a> -->
         <a href="#" class="menu-item">
           <i class="icon">🚚</i>
           <span>Transportadoras</span>
         </a>
-        <a href="#" class="menu-item">
+        <!-- <a href="#" class="menu-item">
           <i class="icon">👥</i>
           <span>Funcionários</span>
-        </a>
-        <a href="#" class="menu-item">
+        </a> -->
+        <!-- <a href="#" class="menu-item">
           <i class="icon">📦</i>
           <span>Estoque</span>
-        </a>
+        </a> -->
         <a href="#" class="menu-item active">
           <i class="icon">💰</i>
-          <span>Vendas</span>
+          <span>Venda</span>
         </a>
-        <a href="#" class="menu-item">
+        <!-- <a href="#" class="menu-item">
           <i class="icon">💳</i>
           <span>Financeiro</span>
-        </a>
+        </a> -->
       </nav>
     </aside>
   
@@ -42,7 +42,7 @@
       <div class="content-header">
         <div class="action-buttons">
           <button class="btn btn-primary" (click)="openModal('add')">Adicionar</button>
-          <button class="btn btn-secondary" (click)="openModal('remove')">Remover</button>
+          <!-- <button class="btn btn-secondary" (click)="openModal('remove')">Remover</button> -->
           <button class="btn btn-secondary" (click)="openModal('edit')">Editar</button>
         </div>
       </div>
@@ -118,7 +118,7 @@
   </div>
   
   <!-- Modal Remover -->
-  <div class="modal-overlay" *ngIf="showModal && modalType === 'remove'" (click)="closeModal()">
+  <!-- <div class="modal-overlay" *ngIf="showModal && modalType === 'remove'" (click)="closeModal()">
     <div class="modal-content modal-small" (click)="$event.stopPropagation()">
       <div class="modal-header">
         <h2>Remover Venda</h2>
@@ -141,7 +141,7 @@
         <button type="button" class="btn btn-danger" (click)="removeSale()">Remover</button>
       </div>
     </div>
-  </div>
+  </div> -->
   
   <!-- Modal Editar -->
   <div class="modal-overlay" *ngIf="showModal && modalType === 'edit'" (click)="closeModal()">
